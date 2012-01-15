@@ -5,6 +5,7 @@ Created on Jan 13, 2012
 '''
 
 from django.core.management.base import BaseCommand, CommandError
+from settings import *
 from updates.models import Update
 import imaplib, dateutil.parser, pytz, sys
 

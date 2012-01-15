@@ -5,6 +5,7 @@ Created on Jan 13, 2012
 '''
 
 from django.core.management.base import BaseCommand, CommandError
+from settings import *
 from github import github
 from updates.models import Update
 import dateutil.parser
