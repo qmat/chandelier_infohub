@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    view sketch
+{% endblock title %}
+
+{% block content %}
+    <h1>{{ sketch.name }}</h1>
+    <p><a href="{% url view_sketch sketch.name %}">View</a> sketch.</p>
+    <code>
+    {{ sketch.text }}
+    </code>
+    <p>Raw code url: <a href="{% url raw_sketch sketch.name %}">{% url raw_sketch sketch.name %}</a></p>
+{% endblock content %}

@@ -89,7 +89,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
 
-    'updates'
+    'updates',
+    'processing',
 )
 
 # A sample logging configuration. The only tangible logging
