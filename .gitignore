@@ -3,3 +3,4 @@
 .pydevproject
 .settings
 *~
+*settings_local.py

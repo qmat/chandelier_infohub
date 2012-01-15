@@ -9,8 +9,6 @@ from updates.models import Update
 import imaplib, dateutil.parser, pytz, sys
 
 SOURCE = "gmail"
-GMAIL_USER = "qmatchandelier@gmail.com"
-GMAIL_PASS = "matfloor4"
 
 class Command(BaseCommand):
 

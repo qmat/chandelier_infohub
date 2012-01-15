@@ -11,7 +11,6 @@ import dateutil.parser
 import pytz
 
 SOURCE = "github"
-GITHUB_USER = "qmat"
 
 class Command(BaseCommand):
 
