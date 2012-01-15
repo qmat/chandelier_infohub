@@ -1,6 +1,5 @@
 '''
-N.B. Don't add this file to the repository, as it contains passwords and other
-     sensitive data!
+N.B. Copy this file to settings_local.py and make the necessary changes.
 '''
 
 DEBUG = True
@@ -22,3 +21,7 @@ GDOCS_PASS  = "XXXX"
 GITHUB_USER = "qmat"
 GMAIL_USER  = "qmatchandelier@gmail.com"
 GMAIL_PASS  = "XXXX"
+
+ADMINS = (
+    #('Your name', 'your@email.com'),
+)

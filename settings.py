@@ -3,11 +3,6 @@ import os
 
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
 
-ADMINS = (
-    ('Vincent Akkermans', 'vincent.akkermans@gmail.com'),
-    ('Matt Jarvis', 'mattjarvis@mac.com'),
-)
-
 MANAGERS = ADMINS
 
 TIME_ZONE = 'Europe/London'
