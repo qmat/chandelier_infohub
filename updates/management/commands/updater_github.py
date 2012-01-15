@@ -41,7 +41,8 @@ class Command(BaseCommand):
             most_recent_branch = False
             most_recent_branch_ts = False
             most_recent_commit = False
-            for branchname, _ in gh.repos.branches(GITHUB_USER, r.name).items():
+            branches = gh.repos.branches(GITHUB_USER, r.name)
+            for branchname, _ in branches.items():
                 commits = gh.commits.forBranch('qmat', r.name, branchname)
                 # ignore the branch if there are no commits
                 if not commits:
@@ -53,7 +54,7 @@ class Command(BaseCommand):
                     most_recent_branch_ts = branch_ts
                     most_recent_commit = commits[0]
             # we now have the most recent branch
-            if not updates or most_recent_branch_ts > updates[0].timestamp:
+            if branches and (not updates or most_recent_branch_ts > updates[0].timestamp):
                 new_update = Update()
                 new_update.source = SOURCE
                 new_update.timestamp = most_recent_branch_ts
