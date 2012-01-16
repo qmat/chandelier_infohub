@@ -16,9 +16,6 @@ class __Messenger():
 
     @classmethod
     def call_service(cls, address, data, timeout=3600):
-
-        print dir(json)
-
         t = threading.currentThread()
         if t in cls.ctxs:
             tctx = cls.ctxs[t]
