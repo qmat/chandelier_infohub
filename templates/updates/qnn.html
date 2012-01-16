@@ -5,23 +5,9 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="{{ STATIC_URL }}jquery.marquee/lib/jquery.marquee.min.js" type="text/javascript"></script>
 
-    <!-- <link type="text/css" href="{{ STATIC_URL }}jquery.marquee/css/jquery.marquee.css" rel="stylesheet" media="all" /> -->
-
     <style type="text/css">
         body {
             margin: 0;
-            background-image: url('{{ STATIC_URL }}qnn.png');
-            background-repeat: no-repeat;
-        }
-        #banner {
-            position: absolute;
-            left: 10px;
-            top: 500px;
-            height: 80px;
-            width: 600px;
-            //background-color: red;
-            font-size: 24px;
-            overflow: hidden;
         }
 
         ul.marquee {
@@ -35,11 +21,17 @@
             overflow: hidden;
 
             /* optional styles for appearance */
-            width: 500px;
-            height: 80px; /* height should be included to reserve visual space for the marquee */
+            width: 600px;
+            height: 80px;
 
-            //background-color: #f2f2ff;
-            //border: 1px solid #08084d;
+            position: relative;
+
+            top: 500px;
+            margin-left: 10px;
+            margin-right: 190px;
+            font-size: 24px;
+            overflow: hidden;
+            float: left;
         }
 
         ul.marquee li {
@@ -54,6 +46,13 @@
             font: 34px Arial, Helvetica, sans-serif;
             color: white;
             padding: 13px 5px;
+        }
+
+        #outer {
+            width: 6400px;
+            height: 600px;
+            background-image: url('{{ STATIC_URL }}qnn.png');
+            background-repeat: repeat-x;
         }
 
     </style>
@@ -76,7 +75,7 @@
 
             });
 
-            addMessage('#banner', bannerString);
+            addMessage('.marquee', bannerString);
 
             startBanner();
 
@@ -87,8 +86,8 @@
 
     function startBanner()
     {
-        $("#banner").marquee({
-            loop: 1,
+        $(".marquee").marquee({
+            loop: -1,
 
             // this callback runs when the marquee is initialized
             init: function ($marquee, options)
@@ -139,6 +138,15 @@
 <body>
 </body>
 
-<ul id="banner" class="marquee"></ul>
+<div id="outer">
+    <ul class="marquee"></ul>
+    <ul class="marquee"></ul>
+    <ul class="marquee"></ul>
+    <ul class="marquee"></ul>
+    <ul class="marquee"></ul>
+    <ul class="marquee"></ul>
+    <ul class="marquee"></ul>
+    <ul class="marquee"></ul>
+</div>
 
 </html>
