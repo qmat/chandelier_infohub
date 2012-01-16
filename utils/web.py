@@ -1,10 +1,7 @@
 from django.shortcuts import render_to_response
-from django.template import RequestContext, Context, Template
-from django.template.loader import get_template
+from django.template import RequestContext
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse
 import inspect
-from utils.json import json_encode
 
 def rtr(template):
     data = inspect.currentframe().f_back.f_locals
