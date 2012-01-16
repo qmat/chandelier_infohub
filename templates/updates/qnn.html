@@ -1,0 +1,144 @@
+<html>
+<head>
+    <title>QNN - The latest MAT news</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}jquery.marquee/lib/jquery.marquee.min.js" type="text/javascript"></script>
+
+    <!-- <link type="text/css" href="{{ STATIC_URL }}jquery.marquee/css/jquery.marquee.css" rel="stylesheet" media="all" /> -->
+
+    <style type="text/css">
+        body {
+            margin: 0;
+            background-image: url('{{ STATIC_URL }}qnn.png');
+            background-repeat: no-repeat;
+        }
+        #banner {
+            position: absolute;
+            left: 10px;
+            top: 500px;
+            height: 80px;
+            width: 600px;
+            //background-color: red;
+            font-size: 24px;
+            overflow: hidden;
+        }
+
+        ul.marquee {
+            /* required styles */
+            display: block;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            line-height: 1;
+            position: relative;
+            overflow: hidden;
+
+            /* optional styles for appearance */
+            width: 500px;
+            height: 80px; /* height should be included to reserve visual space for the marquee */
+
+            //background-color: #f2f2ff;
+            //border: 1px solid #08084d;
+        }
+
+        ul.marquee li {
+            /* required styles */
+            position: absolute;
+            top: -999em;
+            left: 0;
+            display: block;
+            white-space: nowrap; /* keep all text on a single line */
+
+            /* optional styles for appearance */
+            font: 34px Arial, Helvetica, sans-serif;
+            color: white;
+            padding: 13px 5px;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+
+    var updates_api_uri = '/api/v1/update/'
+
+    $(document).ready(function (){
+
+        $.getJSON(updates_api_uri, function(data) {
+
+            var bannerString = '';
+
+            $.each(data.objects, function(key, obj) {
+                console.debug(obj);
+                bannerString += obj['author'] + " @ ";
+                bannerString += obj['source'] + ": ";
+                bannerString += obj['text'] + " &#x25C6; ";
+
+            });
+
+            addMessage('#banner', bannerString);
+
+            startBanner();
+
+        });
+
+    });
+
+
+    function startBanner()
+    {
+        $("#banner").marquee({
+            loop: 1,
+
+            // this callback runs when the marquee is initialized
+            init: function ($marquee, options)
+            {
+                //if( $marquee.is("#marquee2") ) options.yScroll = "bottom";
+            },
+
+            // this callback runs before a marquee is shown
+            beforeshow: function ($marquee, $li)
+            {
+            },
+
+            // this callback runs when a has fully scrolled into view (from either top or bottom)
+            show: function ()
+            {
+            },
+
+            // this callback runs when a after message has being shown
+            aftershow: function ($marquee, $li)
+            {
+            }
+        });
+    }
+
+    var iNewMessageCount = 0;
+
+    function addMessage(selector, message){
+        // increase counter
+        iNewMessageCount++;
+        // append a new message to the marquee scrolling list
+        var $ul = $(selector).append("<li>" + message + "</li>");
+        // update the marquee
+        $ul.marquee("update");
+    }
+
+    function pause(selector){
+        $(selector).marquee('pause');
+    }
+
+    function resume(selector){
+        $(selector).marquee('resume');
+    }
+
+
+    </script>
+</head>
+
+<body>
+</body>
+
+<ul id="banner" class="marquee"></ul>
+
+</html>

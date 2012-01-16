@@ -1,40 +1,26 @@
 from django.conf.urls.defaults import patterns, include, url
-
+from api.urls import v1_api
 from django.contrib import admin
-admin.autodiscover()
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from settings import DEBUG
 
-import processing.views
+admin.autodiscover()
 
 urlpatterns = patterns('',
 
-    url(r'^processing/upload/$',
-        processing.views.upload_sketch,
-        name="upload_sketch"),
+    (r'^processing/',
+     include('processing.urls')),
 
-    url(r'^processing/code/(?P<sketch>[^//]+)/$',
-        processing.views.view_sketch_code,
-        name="view_sketch_code"),
+    (r'^updates/',
+     include('updates.urls')),
 
-    url(r'^processing/raw/random/$',
-        processing.views.raw_sketch_random,
-        name="random_raw_sketch"),
-
-    url(r'^processing/raw/(?P<sketch>[^//]+)$',
-        processing.views.raw_sketch,
-        name="raw_sketch"),
-
-    url(r'^processing/sketch/random/$',
-        processing.views.view_sketch_random,
-        name="view_sketch"),
-
-    url(r'^processing/sketch/(?P<sketch>[^//]+)$',
-        processing.views.view_sketch,
-        name="view_sketch"),
-
-
-
-
+    (r'^api/',
+     include(v1_api.urls)),
 
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
+
+if DEBUG:
+    urlpatterns += staticfiles_urlpatterns()
+
