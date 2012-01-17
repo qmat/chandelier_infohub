@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    upload new quartz sketch
+{% endblock title %}
+
+{% block content %}
+    <div id="new-quartz-sketch">
+        <form enctype="multipart/form-data" action="." method="POST">{% csrf_token %}
+            {{ form.as_p }}
+            <br>
+            <input type="submit" value="upload sketch">
+        </form>
+    </div>
+{% endblock content %}

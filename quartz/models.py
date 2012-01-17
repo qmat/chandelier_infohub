@@ -1,7 +1,7 @@
 from django.db import models
 
-class ProcessingSketch(models.Model):
+class QuartzSketch(models.Model):
     name                  = models.CharField(max_length=512)
-    text                  = models.TextField()
+    file                  = models.FileField(upload_to="quartz")
     db_created            = models.DateTimeField(auto_now_add=1)
 

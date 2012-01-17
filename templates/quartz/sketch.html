@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    view quartz sketch
+{% endblock title %}
+
+{% block content %}
+    <h1>{{ sketch.name }}</h1>
+
+    <p>uploaded at {{ sketch.db_created|date }}</p>
+{% endblock content %}

@@ -1,7 +1,8 @@
 from django.db import models
 
-class ProcessingSketch(models.Model):
+class WebViewPreset(models.Model):
     name                  = models.CharField(max_length=512)
-    text                  = models.TextField()
+    views                 = models.IntegerField()
+    urls                  = models.TextField()
     db_created            = models.DateTimeField(auto_now_add=1)
 

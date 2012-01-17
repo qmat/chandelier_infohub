@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    edit web preset
+{% endblock title %}
+
+{% block content %}
+    <div id="edit-web-preset">
+        <form action="." method="POST">{% csrf_token %}
+            {{ form.as_p }}
+            <br>
+            <input type="submit" value="save preset">
+        </form>
+    </div>
+{% endblock content %}

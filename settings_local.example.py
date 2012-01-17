@@ -27,3 +27,5 @@ ADMINS = (
 )
 
 QUATZ_ADDRESS = 'tcp://127.0.0.1:10000'
+
+MEDIA_ROOT = '/Users/someone/data/chandelier/media/'

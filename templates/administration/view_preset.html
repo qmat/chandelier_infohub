@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    web preset
+{% endblock title %}
+
+{% block content %}
+    <h1>{{ preset.name }}</h1>
+    <p>views: {{ preset.views }}
+    <p>urls:
+    <ul>
+    {% for url in urls %}
+        <li>{{ url }}</li>
+    {% endfor %}
+    </ul>
+{% endblock content %}

@@ -3,6 +3,7 @@ from forms import UploadSketchForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404
 from utils.web import rtr, rurl
+import json
 
 
 def __handle_uploaded_file(f):
@@ -46,4 +47,5 @@ def view_sketch(request, sketch):
 
 def view_sketch_random(request):
     sketch = ProcessingSketch.objects.order_by('?')[0]
+    urls = json.loads(sketch.urls)
     return rtr('processing/sketch.html')

@@ -11,8 +11,14 @@ urlpatterns = patterns('',
     (r'^processing/',
      include('processing.urls')),
 
+    (r'^quartz/',
+     include('quartz.urls')),
+
     (r'^updates/',
      include('updates.urls')),
+
+    (r'^administration/',
+     include('administration.urls')),
 
     (r'^api/',
      include(v1_api.urls)),

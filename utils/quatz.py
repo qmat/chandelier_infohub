@@ -4,18 +4,31 @@ from settings import QUATZ_ADDRESS
 def web_mode(views, urls):
     """Starts the web mode on the chandelier.
 
+    Args:
+        views: An integer that specifies how many web views to load.
+        urls: An array with web addresses.
+
+    Returns:
+        None
+
     If there are less urls than views, the urls will be repeated.
     This way you can have the same web page repeated, or two web
     pages alternating.
+    """
+    __set_screen_mode('web', urls=urls, views=views)
+
+
+def quartz_mode(file):
+    """Starts the quartz mode on the chandelier.
 
     Args:
-        views: An integer that specifies how many web views to load.
-        urls: An array with web addresses
+        file: A string that points to a file on disk.
 
     Returns:
         None
     """
-    __set_screen_mode('webview', urls=urls, views=views)
+    __set_screen_mode('quartz', file=file)
+
 
 def __set_screen_mode(mode, **kargs):
     d = {'mode': mode,
