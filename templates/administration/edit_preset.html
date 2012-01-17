@@ -4,6 +4,25 @@
     edit web preset
 {% endblock title %}
 
+{% block extra_head %}
+
+<script type="text/javascript">
+
+
+
+
+$(document).ready(function() {
+    $("select").change(function(e) {
+        var name = $(e.target).attr('name').substr(0,5);
+        var selection = e.target.options[e.target.selectedIndex].value;
+        $('input[name="'+name+'"]').attr('value', selection);
+    });
+});
+
+</script>
+
+{% endblock %}
+
 {% block content %}
     <div id="edit-web-preset">
         <form action="." method="POST">{% csrf_token %}
