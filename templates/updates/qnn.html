@@ -47,10 +47,22 @@
         }
 
         #outer {
-            width: 6400px;
+            width: 800px;
             height: 600px;
             background-image: url('{{ STATIC_URL }}qnn.png');
-            background-repeat: repeat-x;
+            background-repeat: no-repeat;
+        }
+
+        #clock {
+            position: absolute;
+            top: 229px;
+            left: 580px;
+            z-index: 10;
+        }
+
+        .hidden {
+            position: absolute;
+            visibility: hidden;
         }
 
     </style>
@@ -59,28 +71,80 @@
 
     var updates_api_uri = '/api/v1/update/'
 
+    var canvas, context;
+    var minuteHand, hourHand;
+
     $(document).ready(function (){
 
+        // start updates
         $.getJSON(updates_api_uri, function(data) {
-
             var bannerString = '';
-
             $.each(data.objects, function(key, obj) {
                 console.debug(obj);
                 bannerString += obj['author'] + " @ ";
                 bannerString += obj['source'] + ": ";
                 bannerString += obj['text'] + " &#x25C6; ";
-
             });
-
             addMessage('.marquee', bannerString);
-
             startBanner();
-
         });
+
+        // start clock
+        startClock();
 
     });
 
+    var width = 124;
+    var height = 124;
+    var minuteHandWidth = 10;
+    var minuteHandHeight = 72;
+    var hourHandWidth = 10;
+    var hourHandHeight = 34;
+
+    function startClock()
+    {
+        minuteHand = $('#minute-hand')[0];
+        hourHand = $('#hour-hand')[0];
+
+        canvas = document.getElementById("clock");
+        context = canvas.getContext("2d");
+
+        setTimeout(function () {
+            drawTime();
+        }, 500);
+
+    }
+
+    function drawTime()
+    {
+        context.clearRect (0, 0, width, height);
+        d = new Date();
+        drawHourHand(((d.getHours()%12 + d.getMinutes()/60) / 12) * 2 * Math.PI);
+        drawMinuteHand((d.getMinutes() / 60) * 2 * Math.PI);
+        setTimeout(function () {
+            drawTime();
+        }, 60000);
+    }
+
+    function drawMinuteHand(radians)
+    {
+        context.save();
+        context.translate(width/2, height/2);
+        context.rotate(radians);
+        context.translate(-5, -57);
+        context.drawImage(minuteHand, 0, 0, minuteHandWidth, minuteHandHeight);
+        context.restore();
+    }
+
+    function drawHourHand(radians)
+    {
+        context.save();
+        context.translate(width/2, height/2);
+        context.rotate(radians);
+        context.translate(-5, -29);
+        context.drawImage(hourHand, 0, 0, hourHandWidth, hourHandHeight);
+        context.restore();
+    }
 
     function startBanner()
     {
@@ -134,17 +198,16 @@
 </head>
 
 <body>
-</body>
+
+<img id="hour-hand" src="{{ STATIC_URL }}hour_hand.png" class="hidden"/>
+<img id="minute-hand" src="{{ STATIC_URL }}minute_hand.png" class="hidden"/>
 
 <div id="outer">
     <ul class="marquee"></ul>
-    <ul class="marquee"></ul>
-    <ul class="marquee"></ul>
-    <ul class="marquee"></ul>
-    <ul class="marquee"></ul>
-    <ul class="marquee"></ul>
-    <ul class="marquee"></ul>
-    <ul class="marquee"></ul>
 </div>
+
+<canvas id="clock" width="124" height="124"></canvas>
+
+</body>
 
 </html>

@@ -1,16 +1,17 @@
 from django import forms
 from processing.models import ProcessingSketch
-from utils.web import rurl
+#from utils.web import rurl
 from django.contrib.sites.models import Site
-
+from quartz.models import QuartzSketch
+from models import WebViewPreset
 
 
 class URLOrProcessingWidget(forms.TextInput):
 
     def __init__(self, attrs=None):
         # options for dropdown, also be sure to set the Site in the admin
-        # N.B. can't use rurl because it causes circular impors
-        processing_sketches = [('http://%s/processing/raw/%s' % \
+        # N.B. can't use rurl because it causes circular imports
+        processing_sketches = [('http://%s/processing/sketch/%s' % \
                                 (Site.objects.get_current().domain, sk.name), sk.name) \
                                for sk in ProcessingSketch.objects.all()]
         processing_sketches = [('', '')] + processing_sketches
@@ -35,3 +36,9 @@ class WebViewPresetForm(forms.Form):
     url_8 = forms.CharField(widget=URLOrProcessingWidget, required=False)
 
 
+class ChangeScreenForm(forms.Form):
+    # load the choices dynamically
+    def __init__(self, *args, **kwargs):
+        super(ChangeScreenForm, self).__init__(*args, **kwargs)
+        self.fields['quartz_sketch'] = forms.ChoiceField(required=False, choices=[('', '')] + [(o.file.path, o.name) for o in QuartzSketch.objects.all()] )
+        self.fields['web_preset'] = forms.ChoiceField(required=False, choices=[('', '')] + [(o.name, o.name) for o in WebViewPreset.objects.all()])

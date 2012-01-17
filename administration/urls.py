@@ -15,6 +15,10 @@ urlpatterns = patterns('',
         administration.views.view_preset,
         name="view_web_preset"),
 
+    url(r'^screen/$',
+        administration.views.change_screen,
+        name="change_screen"),
+
 )
 
 
