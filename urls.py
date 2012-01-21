@@ -3,6 +3,7 @@ from api.urls import v1_api
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from settings import DEBUG
+from django.views.generic.simple import direct_to_template
 
 admin.autodiscover()
 
@@ -22,6 +23,12 @@ urlpatterns = patterns('',
 
     (r'^api/',
      include(v1_api.urls)),
+
+    url(r'^streetview/$',
+        direct_to_template,
+        {'template': 'streetview/streetview.html'},
+        name="qnn"),
+
 
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
