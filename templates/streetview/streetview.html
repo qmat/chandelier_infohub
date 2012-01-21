@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+    <head>
+        <!--<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/all.css" />-->
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+        
+        <style type="text/css">
+		  body {
+		    margin: 0;
+		    padding: 0;
+		    overflow: hidden;
+		  }
+		  div#visible_wrapper {
+		  	width: 6656px;
+		  }
+		  div#visible_wrapper img {
+  		  	margin: 0;
+		  	padding: 0;
+		  	height: 300;
+		  	width: 512;
+		  	float: left;
+		  }
+		</style>
+		
+		<script type="text/javascript">
+		
+		
+			var startPanoid;
+			var previousPanoid;
+			var currentPanoid;
+			var newPanoid;
+			var imagesLoaded;
+			
+			var xImages = 13;
+			var yImages = 2;
+			var xOffset = 3;
+			var yOffset = 2;
+			var xModulo = 13;
+			var yModulo = 7;
+			var zoomLevel = 4;
+			
+			var refreshInterval = 200;
+			
+			var totalImages = xImages * yImages;
+			
+			var newImages;
+			
+		
+			function start()
+			{
+				newImages = [];
+				
+				for(i=0; i<yImages; i++)
+				{
+					newImages[i] = [];
+					for(j=0; j<xImages; j++)
+						newImages[i][j] = 0;
+				}	
+			
+				startPanoid = "pRDNtqjbN_gA-828AOQOlw";
+				previousPanoid = startPanoid;
+				currentPanoid = startPanoid;
+				newPanoid = startPanoid;
+				// just to be safe set imagesLoaded to 
+				imagesLoaded = 0;
+				cachePanoid(startPanoid);
+			}
+			
+			
+			function cacheImage(url, x, y)
+			{
+				var img = new Image();
+      			newImages[y][x] = img;
+      			$(img).load(checkImages).error(checkImages).attr('src', url).attr('width', 512).attr('height', 300)	;
+			}
+			
+			
+			function getNextPanoid(panoid)
+			{
+				var url = 'http://maps.google.com/cbk?callback=?&output=json&panoid='+panoid;
+				$.getJSON(url, function(data) {
+					
+					// if there are no links, shouldn't happen, but hey, it could, then start over.
+					if(data['Links'].length <=1)
+						start();
+					
+					// keep track of history
+					previousPanoid = currentPanoid;
+					currentPanoid = panoid;
+
+					while(true)
+					{				
+						var randomIndex = Math.floor(Math.random() * data['Links'].length);
+						if(data['Links'][randomIndex]["panoId"] != previousPanoid)
+						{
+							newPanoid = data['Links'][randomIndex]["panoId"];
+							//console.debug(newPanoid);
+							cachePanoid(newPanoid);
+							break;
+						}
+					}
+				})
+			}
+			
+			
+			function checkImages()
+			{
+				imagesLoaded += 1;
+				if(imagesLoaded == totalImages)
+				{
+					displayImages();
+					imagesLoaded = 0;
+				}
+			}
+			
+			
+			function cachePanoid(panoid)
+			{
+				for(i=0;i<yImages;i++)
+				{
+					for(j=0;j<xImages;j++)
+					{
+						//console.debug(i + ' ' + j);
+						url = 'http://cbk0.google.com/cbk?output=tile&panoid=' + panoid + '&x=' + 
+							  ((j + xOffset) % xModulo) + '&y=' + ((i + yOffset) % yModulo) + '&zoom=' + zoomLevel;
+						cacheImage(url, j, i);
+					}
+				}
+			}
+			
+			
+			function displayImages()
+			{
+				// clear visible wrapper
+				$("#visible_wrapper img").attr("src", "").load();
+				$(".wrapper_0").empty();
+				$(".wrapper_1").empty();
+				
+				// add invisible images to visible wrapper
+				for(i=0; i<yImages; i++)
+				{
+					for(j=0; j<xImages; j++)
+					{
+						$("#visible_wrapper .wrapper_"+i).append(newImages[i][j]);
+					}
+				}
+				console.debug("showed pictures");
+				
+				// get next panoid
+				setTimeout(function() {getNextPanoid(newPanoid)}, refreshInterval);
+			}
+			
+		
+		</script>
+    </head>
+
+    <body onload="start();">
+
+		<div id="visible_wrapper">
+		
+			<div class="wrapper_0">
+			</div>
+		
+			<br>
+		
+			<div class="wrapper_1">
+			</div>
+			
+		</div>
+
+    </body>
+
+</html>
