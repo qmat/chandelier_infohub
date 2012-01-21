@@ -8,13 +8,13 @@ http://www.apple.com/DTDs/PropertyList-1.0.dtd >
 <key>ProgramArguments</key>
 <array>
         <string>/usr/bin/ssh</string>
-        <string>-nNT</string>
+        <string>-Nq</string>
         <string>-R 9000:127.0.0.1:8000</string>
         <string>vakkermans@twobbler.net</string>
 </array>
-<key>Debug</key><false/>
+<key>Debug</key><true/>
 <key>Disabled</key><false/>
-<key>OnDemand</key><false/>
-<key>RunAtLoad</key><false/>
+<key>KeepAlive</key><true/>
+<key>RunAtLoad</key><true/>
 </dict>
 </plist>
