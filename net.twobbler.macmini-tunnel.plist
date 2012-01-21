@@ -3,8 +3,8 @@
 http://www.apple.com/DTDs/PropertyList-1.0.dtd >
 <plist version='1.0'>
 <dict>
-<key>Label</key><string>com.automatthew.ssh_tunnel</string>
-<key>UserName</key><string>matthew</string>
+<key>Label</key><string>net.twobbler.macmini-tunnel</string>
+<key>UserName</key><string>mat</string>
 <key>ProgramArguments</key>
 <array>
         <string>/usr/bin/ssh</string>
