@@ -1,14 +1,18 @@
 import zmq, time, threading, json, os, subprocess
 from settings import QUATZ_ADDRESS
 global quatz_instance
+quatz_instance = False
 
 def open_quatz():
     global quatz_instance
-    quatz_instance = subprocess.Popen("/Users/%s/src/chandelier_displayer/build/Release/Quatz.app/Contents/MacOS/Quatz" % os.environ['USER'])
+    if not quatz_instance:
+        quatz_instance = subprocess.Popen("/Users/%s/src/chandelier_displayer/build/Release/Quatz.app/Contents/MacOS/Quatz" % os.environ['USER'])
 
 def quit_quatz():
     global quatz_instance
-    quatz_instance.terminate()
+    if quatz_instance:
+        quatz_instance.terminate()
+        quatz_instance = False
 
 def test_quatz():
     open_quatz()
