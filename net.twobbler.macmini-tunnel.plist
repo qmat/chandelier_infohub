@@ -1,20 +1,27 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE plist PUBLIC -//Apple Computer//DTD PLIST 1.0//EN
-http://www.apple.com/DTDs/PropertyList-1.0.dtd >
-<plist version='1.0'>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
 <dict>
-<key>Label</key><string>net.twobbler.macmini-tunnel</string>
-<key>UserName</key><string>mat</string>
-<key>ProgramArguments</key>
-<array>
+    <key>Label</key>
+    <string>net.twobbler.chandelier-tunnel</string>
+    <key>Debug</key>
+    <true/>
+    <key>KeepAlive</key>
+    <dict>
+          <key>NetworkState</key>
+          <true/>
+        </dict>
+    <key>LimitLoadToSessionType</key>
+    <string>Aqua</string>
+    <key>ProgramArguments</key>
+    <array>
         <string>/usr/bin/ssh</string>
-        <string>-Nq</string>
-        <string>-R 9000:127.0.0.1:8000</string>
-        <string>vakkermans@twobbler.net</string>
-</array>
-<key>Debug</key><true/>
-<key>Disabled</key><false/>
-<key>KeepAlive</key><true/>
-<key>RunAtLoad</key><true/>
+                <string>-N</string>
+                <string>-q</string>
+                <string>-R</string>
+                <string>9000:localhost:8000</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
 </dict>
 </plist>
