@@ -10,7 +10,7 @@
     <dict>
           <key>NetworkState</key>
           <true/>
-        </dict>
+    </dict>
     <key>LimitLoadToSessionType</key>
     <string>Aqua</string>
     <key>ProgramArguments</key>
@@ -20,6 +20,7 @@
                 <string>-q</string>
                 <string>-R</string>
                 <string>9000:localhost:8000</string>
+                <string>vakkermans@twobbler.net</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
