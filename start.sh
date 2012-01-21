@@ -9,5 +9,5 @@ GROUP=staff
 
 cd /Users/$USER/src/chandelier_infohub/
 source /Users/$USER/.virtualenvs/chandelier_infohub/bin/activate
-exec /usr/local/bin/gunicorn_django -w $NUM_WORKERS \
+exec /Users/$USER/.virtualenvs/chandelier_infohub/bin/gunicorn_django -w $NUM_WORKERS \
     --user=$USER --group=$GROUP --bind $ADDRESS
