@@ -16,3 +16,4 @@ readline==6.2.1
 ssh==1.7.11
 virtualenv==1.6.3
 virtualenvwrapper==2.7.1
+gunicorn
