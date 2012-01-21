@@ -42,3 +42,7 @@ class ChangeScreenForm(forms.Form):
         super(ChangeScreenForm, self).__init__(*args, **kwargs)
         self.fields['quartz_sketch'] = forms.ChoiceField(required=False, choices=[('', '')] + [(o.file.path, o.name) for o in QuartzSketch.objects.all()] )
         self.fields['web_preset'] = forms.ChoiceField(required=False, choices=[('', '')] + [(o.name, o.name) for o in WebViewPreset.objects.all()])
+
+    on_or_off = forms.ChoiceField(required=False, choices=[('', ''),
+                                                           ('on', 'on'),
+                                                           ('off', 'off')])

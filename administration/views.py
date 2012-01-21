@@ -3,7 +3,7 @@ from forms import WebViewPresetForm, ChangeScreenForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404
 from utils.web import rtr, rurl
-from utils.quatz import web_mode, quartz_mode
+from utils.quatz import web_mode, quartz_mode, open_quatz, quit_quatz
 import json
 
 def __save_preset(form):
@@ -64,12 +64,19 @@ def change_screen(request):
     if request.POST:
         form = ChangeScreenForm(request.POST)
         if form.is_valid():
-            if form.cleaned_data['quartz_sketch']:
-                quartz_mode(form.cleaned_data['quartz_sketch'])
-            elif form.cleaned_data['web_preset']:
-                preset = WebViewPreset.objects.get(name=form.cleaned_data['web_preset'])
-                urls = json.loads(preset.urls)
-                web_mode(preset.views, urls)
+            # turning the screen off
+            if form.cleaned_data['on_or_off'] == 'off':
+                quit_quatz()
+            # turning it on or changing it
+            else:
+                if form.cleaned_data['on_or_off'] == 'on':
+                    open_quatz()
+                if form.cleaned_data['quartz_sketch']:
+                    quartz_mode(form.cleaned_data['quartz_sketch'])
+                elif form.cleaned_data['web_preset']:
+                    preset = WebViewPreset.objects.get(name=form.cleaned_data['web_preset'])
+                    urls = json.loads(preset.urls)
+                    web_mode(preset.views, urls)
     else:
         form = ChangeScreenForm()
     return rtr('administration/change_screen.html')

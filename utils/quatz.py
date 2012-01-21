@@ -1,5 +1,19 @@
-import zmq, time, threading, json
+import zmq, time, threading, json, os, subprocess
 from settings import QUATZ_ADDRESS
+global quatz_instance
+
+def open_quatz():
+    global quatz_instance
+    quatz_instance = subprocess.Popen("/Users/%s/src/chandelier_displayer/build/Release/Quatz.app/Contents/MacOS/Quatz" % os.environ['USER'])
+
+def quit_quatz():
+    global quatz_instance
+    quatz_instance.terminate()
+
+def test_quatz():
+    open_quatz()
+    time.sleep(10)
+    quit_quatz()
 
 def web_mode(views, urls):
     """Starts the web mode on the chandelier.

@@ -27,7 +27,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         articles = feedparser.parse(FEED_URL)['entries']
-        print articles
         # get the latest vimeo update timestamp=
         updates = Update.objects.filter(source=SOURCE).order_by('-timestamp')
 
