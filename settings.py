@@ -90,6 +90,8 @@ INSTALLED_APPS = (
     'processing',
     'quartz',
     'administration',
+
+    'chronograph',
 )
 
 # A sample logging configuration. The only tangible logging
