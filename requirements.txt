@@ -17,3 +17,4 @@ ssh==1.7.11
 virtualenv==1.6.3
 virtualenvwrapper==2.7.1
 gunicorn
+-e hg+https://bitbucket.org/wnielson/django-chronograph#egg=django-chronograph
