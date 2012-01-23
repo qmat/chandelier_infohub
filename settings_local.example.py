@@ -21,6 +21,8 @@ GDOCS_PASS  = "XXXX"
 GITHUB_USER = "qmat"
 GMAIL_USER  = "qmatchandelier@gmail.com"
 GMAIL_PASS  = "XXXX"
+TWITTER_USER = "qmatchandelier"
+TWITTER_PASS = "XXXX"
 
 ADMINS = (
     #('Your name', 'your@email.com'),
