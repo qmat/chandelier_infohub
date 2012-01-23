@@ -1,7 +1,19 @@
-import zmq, time, threading, json, os, subprocess
+import zmq, time, thread, json, os, subprocess
 from settings import QUATZ_ADDRESS
 global quatz_instance
 quatz_instance = False
+
+
+def start_doorbell_mode():
+    web_mode(8, ['http://10.0.2.1/~MAT/ipcamimages/index.html'])
+    stop_doorbell_mode()
+
+def stop_doorbell_mode():
+    thread.start_new_thread (__stop_doorbell_mode)
+
+def __stop_doorbell_mode():
+    time.sleep(20)
+    web_mode(8, ['http://127.0.0.1:8000/updates/qnn/'])
 
 def open_quatz():
     global quatz_instance
