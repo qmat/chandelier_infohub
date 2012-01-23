@@ -59,7 +59,7 @@ class Command(BaseCommand):
                 new_update.source = SOURCE
                 new_update.timestamp = most_recent_branch_ts
                 new_update.author = most_recent_commit.author.name
-                new_update.text = "A change was committed to the %s repository on branch %s." % (r.name, most_recent_branch)
+                new_update.text = "Changed %s repo" % r.name
                 new_update.save()
 
 
