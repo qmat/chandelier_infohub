@@ -138,7 +138,7 @@
         $('#news-list').html(listString);
 
         // update every 5 minutes
-        setTimeout(function() {$.getJSON(updates_api_uri, updateNews);}, 300000);
+        setTimeout(function() {$.getJSON(updates_api_uri, updateNews);}, 60000);
     }
 
     $(document).ready(function (){
