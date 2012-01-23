@@ -1,61 +1,19 @@
-
-
-<body onLoad="holdUp()">
-<p>
-<img src="http://anyone:@10.0.2.3/snapshot.cgi" width="800" height="600" name="campic" />
-</p>
-<p></p>
-</body>
-
-
-<script type="text/javascript">
-<!--
-//
-//AJAXCam v0.8b (c) 2005 Douglas Turecek http://www.ajaxcam.com
-//
-function holdUp()
+<script type="text/javascript" language="JavaScript">
+newImage = new Image();
+function LoadNewImage()
 {
-//
-// This function is first called either by an onLoad event in the <body> tag
-// or some other event, like onClick.
-//
-// Set the value of refreshFreq to how often (in seconds)
-// you want the picture to refresh
-//
-refreshFreq=900;
-//
-//after the refresh time elapses, go and update the picture
-//
-setTimeout("freshPic()", refreshFreq);
+var unique = new Date();
+document.images.webcam.src = newImage.src;
+newImage.src = "http://anyone:@10.0.2.3/snapshot.cgi?time=" + unique.getTime();
 }
 
-function freshPic()
+function InitialImage()
 {
-//
-// Get the source value for the picture
-// e.g. http://www.mysite.com/doug.jpg and
-//
-var currentPath=document.campic.src;
-//
-// Declare a new array to put the trimmed part of the source
-// value in
-//
-var trimmedPath=new Array();
-//
-// Take everything before a question mark in the source value
-// and put it in the array we created e.g. doug.jpg?0.32234 becomes
-// doug.jpg (with the 0.32234 going into the second array spot
-//
-trimmedPath=currentPath.split("?");
-//
-// Take the source value and tack a qustion mark followed by a random number
-// This makes the browser treat it as a new image and not use the cached copy
-//
-document.campic.src = trimmedPath[0] + "?" + Math.random();
-//
-// Go back and wait again.
-holdUp();
+var unique = new Date();
+newImage.onload = LoadNewImage;
+newImage.src = "http://anyone:@10.0.2.3/snapshot.cgi?time=" + unique.getTime();
+document.images.webcam.onload="";
 }
-
-// -->
 </script>
+
+<img src="http://anyone:@10.0.2.3/snapshot.cgi" name="webcam" onload="InitialImage()" width="640" height="480">
