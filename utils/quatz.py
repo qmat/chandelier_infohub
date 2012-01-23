@@ -1,4 +1,4 @@
-import zmq, time, thread, json, os, subprocess
+import zmq, time, thread, threading, json, os, subprocess
 from settings import QUATZ_ADDRESS
 global quatz_instance
 quatz_instance = False
