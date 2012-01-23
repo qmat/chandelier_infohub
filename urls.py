@@ -21,6 +21,9 @@ urlpatterns = patterns('',
     (r'^administration/',
      include('administration.urls')),
 
+    (r'^doorbell/',
+     include('doorbell.urls')),
+
     (r'^api/',
      include(v1_api.urls)),
 

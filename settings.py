@@ -92,6 +92,7 @@ INSTALLED_APPS = (
     'administration',
 
     'chronograph',
+    'doorbell',
 )
 
 # A sample logging configuration. The only tangible logging
