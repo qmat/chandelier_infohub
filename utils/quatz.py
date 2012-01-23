@@ -6,7 +6,7 @@ quatz_instance = False
 
 def doorbell_mode():
     web_mode(8, ['http://10.0.2.1/~MAT/ipcamimages/index.html'])
-    time.sleep(5)
+    time.sleep(15)
     web_mode(4, ['http://127.0.0.1:8000/updates/qnn/'])
 
 def open_quatz():
