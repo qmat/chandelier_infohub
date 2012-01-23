@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Processing sketches
+{% endblock title %}
+
+{% block content %}
+    <h1>Processing sketches</h1>
+
+    <ul>
+        {% for sketch in sketches.all %}
+        <li>
+            <a href="{% url view_sketch_code sketch.name %}">{{ sketch.name }}</a>
+        </li>
+        {% endfor %}
+
+    </ul>
+{% endblock content %}

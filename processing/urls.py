@@ -20,6 +20,10 @@ urlpatterns = patterns('',
         processing.views.raw_sketch,
         name="raw_sketch"),
 
+    url(r'^sketch/$',
+        processing.views.list_sketches,
+        name="list_sketches"),
+
     url(r'^sketch/random/$',
         processing.views.view_sketch_random,
         name="view_sketch"),

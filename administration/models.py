@@ -5,4 +5,3 @@ class WebViewPreset(models.Model):
     views                 = models.IntegerField()
     urls                  = models.TextField()
     db_created            = models.DateTimeField(auto_now_add=1)
-

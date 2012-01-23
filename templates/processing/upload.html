@@ -5,6 +5,7 @@
 {% endblock title %}
 
 {% block content %}
+    <h1>Upload processing sketch</h1>
     <div id="new-processing-sketch" class="simple-center">
         <form enctype="multipart/form-data" action="." method="POST">{% csrf_token %}
             {{ form.as_p }}

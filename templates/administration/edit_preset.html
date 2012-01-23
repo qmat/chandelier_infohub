@@ -24,6 +24,7 @@ $(document).ready(function() {
 {% endblock %}
 
 {% block content %}
+    <h1>Edit preset</h1>
     <div id="edit-web-preset">
         <form action="." method="POST">{% csrf_token %}
             {{ form.as_p }}

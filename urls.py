@@ -29,6 +29,11 @@ urlpatterns = patterns('',
         {'template': 'streetview/streetview.html'},
         name="qnn"),
 
+    url(r'^$',
+        direct_to_template,
+        {'template': 'frontpage.html'},
+        name="frontpage"),
+
 
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),

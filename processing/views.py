@@ -49,3 +49,7 @@ def view_sketch_random(request):
     sketch = ProcessingSketch.objects.order_by('?')[0]
     urls = json.loads(sketch.urls)
     return rtr('processing/sketch.html')
+
+def list_sketches(request):
+    sketches = ProcessingSketch.objects.all()
+    return rtr('processing/sketches.html')

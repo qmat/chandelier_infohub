@@ -3,6 +3,10 @@ import administration.views
 
 urlpatterns = patterns('',
 
+    url(r'^presets/$',
+        administration.views.list_presets,
+        name="list_presets"),
+
     url(r'^presets/new/$',
         administration.views.new_preset,
         name="new_web_preset"),

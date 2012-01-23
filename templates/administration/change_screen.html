@@ -5,6 +5,7 @@
 {% endblock title %}
 
 {% block content %}
+    <h1>Change the screen mode</h1>
     <div id="change-screen">
         <form action="." method="POST">{% csrf_token %}
             {{ form.as_p }}

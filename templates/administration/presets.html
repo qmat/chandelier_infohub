@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Processing sketches
+{% endblock title %}
+
+{% block content %}
+    <h1>Web presets</h1>
+
+    <ul>
+        {% for preset in presets.all %}
+        <li>
+            <a href="{% url view_web_preset preset.name %}">{{ preset.name }}</a>
+        </li>
+        {% endfor %}
+
+    </ul>
+{% endblock content %}

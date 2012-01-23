@@ -80,3 +80,8 @@ def change_screen(request):
     else:
         form = ChangeScreenForm()
     return rtr('administration/change_screen.html')
+
+
+def list_presets(request):
+    presets = WebViewPreset.objects.all()
+    return rtr('administration/presets.html')

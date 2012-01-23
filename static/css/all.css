@@ -1,0 +1,67 @@
+body {
+    font-family: 'Duru Sans', sans-serif;
+    margin: 0;
+    font-size: 13px;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+table {
+    border: 0;
+}
+
+a,
+a#visited,
+a#active {
+    color: #6CB096;
+}
+
+#header {
+    padding: 20px;
+}
+
+#logo {
+    float: left;
+}
+
+#logo-chandelier {
+    float: left;
+    font-size: 50px;
+    padding-left: 50px;
+    margin-top: 20px;
+}
+
+br {
+    clear: both;
+}
+
+#menu {
+    height: 100px;
+    width: 100%;
+    //background-color: #C7C9B2;
+    padding-left: 20px;
+    border-top: 1px solid #888;
+    border-bottom: 1px solid #888;
+}
+
+#dingdong {
+    padding-top: 100px;
+    font-size: 70px;
+}
+
+#content {
+    margin-left: 20px;
+    min-height: 400px;
+}
+
+#menu td {
+    padding: 10px;
+    vertical-align: top;
+}
+
+#footer {
+    font-size: 8px;
+    color: #ddd;
+}

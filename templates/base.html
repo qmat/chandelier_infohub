@@ -6,6 +6,7 @@
             <title>{% block title %}QMAT Chandelier{% endblock %}</title>
 
             <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+            <link href='http://fonts.googleapis.com/css?family=Duru+Sans' rel='stylesheet' type='text/css'>
 
             <link REL="SHORTCUT ICON" HREF="{{STATIC_URL}}favicon.ico">
 
@@ -21,7 +22,41 @@
 
             <div id="header">
                 {% block header %}
+                <div id="logo">
+                    <a href="{% url frontpage %}"><img src="{{ STATIC_URL }}mat_logo.png"/></a>
+                </div>
+                <div id="logo-chandelier">
+                    door bell
+                </div>
+                <br>
                 {% endblock header %}
+            </div>
+
+            <div id="menu">
+                {% block menu %}
+                <table>
+                    <tr>
+                        <td>
+                            Manage<br>
+                            <a href="{% url list_presets %}">presets</a><br>
+                            <a href="{% url change_screen %}">change mode</a><br>
+                            <a href="{% url new_web_preset %}">new preset</a><br>
+                        </td>
+                        <td>
+                            Processing<br>
+                            <a href="{% url upload_sketch %}">upload</a><br>
+                            <a href="{% url list_sketches %}">sketches</a><br>
+                        </td>
+                        <td>
+                            Quartz<br>
+                            <a href="{% url upload_quartz_sketch %}">upload</a><br>
+                            <a href="{% url list_quartz_sketches %}">sketches</a><br>
+                        </td>
+
+                    </tr>
+
+                </table>
+                {% endblock %}
             </div>
 
             <div id="main">
@@ -33,6 +68,7 @@
             </div> <!-- /#main -->
 
             <div id="footer">
+                <center><a href="/admin">django admin</a></center>
             </div> <!-- /#footer -->
 
         {% endblock body %}

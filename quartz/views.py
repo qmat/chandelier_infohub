@@ -23,3 +23,7 @@ def upload_sketch(request):
 def view_quartz_sketch(request, sketch):
     sketch = get_object_or_404(QuartzSketch, name=sketch)
     return rtr('quartz/sketch.html')
+
+def list_sketches(request):
+    sketches = QuartzSketch.objects.all()
+    return rtr('quartz/sketches.html')
