@@ -108,35 +108,43 @@
     var canvas, context;
     var minuteHand, hourHand;
 
+    function updateNews(data) {
+        $('#news-list').html('');
+        clearMarquee('.marquee');
+
+        var bannerString = '';
+        var listString = '<ul>';
+        var listUpdates = 0;
+        $.each(data.objects, function(key, obj) {
+            var bannerTmpString = '';
+            bannerTmpString += obj['author'] + " @ ";
+            bannerTmpString += obj['source'] + ": ";
+            bannerTmpString += obj['text'];
+            bannerString += bannerTmpString + " &#x25C6; ";
+            if(listUpdates < 4)
+            {
+                var listTmpString = '';
+                listTmpString += '<span class="author">' + obj['author'] + '</span>' + " @ ";
+                listTmpString += '<span class="source">' + obj['source'] + '</span>' + ": ";
+                listTmpString += '<span class="text">' + obj['text'] + '</span>';
+                listString += '<li>' + listTmpString + '</li>';
+            }
+
+            listUpdates += 1;
+        });
+        addMessage('.marquee', bannerString);
+        startBanner();
+        listString += '</ul>';
+        $('#news-list').html(listString);
+
+        // update every 5 minutes
+        setTimeout(function() {$.getJSON(updates_api_uri, updateNews);}, 300000);
+    }
+
     $(document).ready(function (){
 
         // start updates
-        $.getJSON(updates_api_uri, function(data) {
-            var bannerString = '';
-            var listString = '<ul>';
-            var listUpdates = 0;
-            $.each(data.objects, function(key, obj) {
-                var bannerTmpString = '';
-                bannerTmpString += obj['author'] + " @ ";
-                bannerTmpString += obj['source'] + ": ";
-                bannerTmpString += obj['text'];
-                bannerString += bannerTmpString + " &#x25C6; ";
-                if(listUpdates < 7)
-                {
-                    var listTmpString = '';
-                    listTmpString += '<span class="author">' + obj['author'] + '</span>' + " @ ";
-                    listTmpString += '<span class="source">' + obj['source'] + '</span>' + ": ";
-                    listTmpString += '<span class="text">' + obj['text'] + '</span>';
-                    listString += '<li>' + listTmpString + '</li>';
-                }
-
-                listUpdates += 1;
-            });
-            addMessage('.marquee', bannerString);
-            startBanner();
-            listString += '</ul>';
-            $('#news-list').html(listString);
-        });
+        $.getJSON(updates_api_uri, updateNews);
 
         // start clock
         startClock();
@@ -172,7 +180,7 @@
         drawMinuteHand((d.getMinutes() / 60) * 2 * Math.PI);
         setTimeout(function () {
             drawTime();
-        }, 60000);
+        }, 1000);
     }
 
     function drawMinuteHand(radians)
@@ -231,6 +239,12 @@
         // append a new message to the marquee scrolling list
         var $ul = $(selector).append("<li>" + message + "</li>");
         // update the marquee
+        $ul.marquee("update");
+    }
+
+    function clearMarquee(selector)
+    {
+        var $ul = $(selector).html('');
         $ul.marquee("update");
     }
 
