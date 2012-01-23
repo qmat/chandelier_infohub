@@ -32,8 +32,8 @@
 
         function loadNewImage()
         {
-            imgURL = "http://anyone:@10.0.2.3/snapshot.cgi?time=" + unique.getTime();
             var unique = new Date();
+            imgURL = "http://anyone:@10.0.2.3/snapshot.cgi?time=" + unique.getTime();
             $(newImage).attr('src', imgURL).load(setOtherImages);
         }
 
