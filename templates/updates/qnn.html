@@ -10,6 +10,40 @@
             margin: 0;
         }
 
+        #news-list {
+            background-color: black;
+            color: white;
+            position: absolute;
+            left: 800px;
+            top: 0px;
+            width: 800px;
+            height: 600px;
+            font-size: 24px;
+            overflow: hidden;
+        }
+
+        #news-list ul {
+            list-style-type: none;
+            padding: 0;
+            margin-left: 30px;
+        }
+
+        #news-list li {
+            margin-bottom: 30px;
+        }
+
+        #news-list li .text {
+            color: white;
+        }
+
+        #news-list li .author {
+            color: yellow;
+        }
+
+        #news-list li .source {
+            color: lightblue;
+        }
+
         ul.marquee {
             /* required styles */
             display: block;
@@ -79,14 +113,29 @@
         // start updates
         $.getJSON(updates_api_uri, function(data) {
             var bannerString = '';
+            var listString = '<ul>';
+            var listUpdates = 0;
             $.each(data.objects, function(key, obj) {
-                console.debug(obj);
-                bannerString += obj['author'] + " @ ";
-                bannerString += obj['source'] + ": ";
-                bannerString += obj['text'] + " &#x25C6; ";
+                var bannerTmpString = '';
+                bannerTmpString += obj['author'] + " @ ";
+                bannerTmpString += obj['source'] + ": ";
+                bannerTmpString += obj['text'];
+                bannerString += bannerTmpString + " &#x25C6; ";
+                if(listUpdates < 7)
+                {
+                    var listTmpString = '';
+                    listTmpString += '<span class="author">' + obj['author'] + '</span>' + " @ ";
+                    listTmpString += '<span class="source">' + obj['source'] + '</span>' + ": ";
+                    listTmpString += '<span class="text">' + obj['text'] + '</span>';
+                    listString += '<li>' + listTmpString + '</li>';
+                }
+
+                listUpdates += 1;
             });
             addMessage('.marquee', bannerString);
             startBanner();
+            listString += '</ul>';
+            $('#news-list').html(listString);
         });
 
         // start clock
@@ -207,6 +256,10 @@
 </div>
 
 <canvas id="clock" width="124" height="124"></canvas>
+
+<div id="news-list">
+
+</div>
 
 </body>
 
