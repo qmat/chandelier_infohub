@@ -18,7 +18,7 @@ class Command(BaseCommand):
 
         updates = Update.objects.filter(source=SOURCE).order_by('-timestamp')
         #tweets = api.search('@QMATChandelier')
-        tweets = api.public_timeline()
+        tweets = api.home_timeline()
         for tweet in tweets:
             if not updates or tweet.created_at > updates[0].timestamp:
                 new_update = Update()
