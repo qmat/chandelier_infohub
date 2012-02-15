@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 from settings import *
 from updates.models import Update
 import dateutil.parser, pytz, gdata.docs.service, tweepy
-from settings import TWITTER_PASS, TWITTER_USER
+from settings import TWITTER_PASS, TWITTER_USER, TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET
 
 SOURCE = "twitter"
 
@@ -12,7 +12,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        auth = tweepy.auth.OAuthHandler(TWITTER_USER, TWITTER_PASS)
+        auth = tweepy.OAuthHandler(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET)
+        auth.set_access_token(TWITTER_ACCESS_KEY, TWITTER_ACCESS_SECRET)
         api = tweepy.API(auth)
 
         updates = Update.objects.filter(source=SOURCE).order_by('-timestamp')
