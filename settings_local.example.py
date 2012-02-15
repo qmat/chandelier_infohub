@@ -23,6 +23,10 @@ GMAIL_USER  = "qmatchandelier@gmail.com"
 GMAIL_PASS  = "XXXX"
 TWITTER_USER = "qmatchandelier"
 TWITTER_PASS = "XXXX"
+TWITTER_CONSUMER_KEY = "XXXX"
+TWITTER_CONSUMER_SECRET = "XXX"
+TWITTER_ACCESS_KEY = "XXX"
+TWITTER_ACCESS_SECRET = "XXX"
 
 ADMINS = (
     #('Your name', 'your@email.com'),
