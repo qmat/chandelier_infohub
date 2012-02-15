@@ -24,6 +24,6 @@ class Command(BaseCommand):
                 new_update = Update()
                 new_update.source = SOURCE
                 new_update.timestamp = tweet.created_at
-                new_update.author = tweet.from_user
+                new_update.author = tweet.user.screen_name
                 new_update.text = tweet.text
                 new_update.save()
