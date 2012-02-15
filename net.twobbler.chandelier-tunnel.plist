@@ -2,27 +2,26 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>Label</key>
-    <string>net.twobbler.chandelier-tunnel</string>
-    <key>Debug</key>
-    <true/>
-    <key>KeepAlive</key>
-    <dict>
-          <key>NetworkState</key>
-          <true/>
-    </dict>
-    <key>LimitLoadToSessionType</key>
-    <string>Aqua</string>
-    <key>ProgramArguments</key>
-    <array>
-        <string>/usr/bin/ssh</string>
-                <string>-N</string>
-                <string>-q</string>
-                <string>-R</string>
-                <string>9000:localhost:8000</string>
-                <string>vakkermans@twobbler.net</string>
-    </array>
-    <key>RunAtLoad</key>
-    <true/>
+	<key>Label</key>
+	<string>net.twobbler.chandelier-tunnel</string>
+	<key>Debug</key>
+	<true/>
+	<key>KeepAlive</key>
+	<true/>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/usr/bin/ssh</string>
+		<string>-N</string>
+		<string>-q</string>
+		<string>-R</string>
+		<string>9000:localhost:8000</string>
+		<string>-R</string>
+		<string>9022:localhost:22</string>
+		<string>-R</string>
+		<string>9900:localhost:5900</string>
+		<string>vakkermans@twobbler.net</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
 </dict>
 </plist>
