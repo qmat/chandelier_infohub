@@ -1,4 +1,4 @@
-import zmq, time, thread, threading, json, os, subprocess
+import zmq, time, thread, threading, json, os, subprocess, signal
 from settings import QUATZ_ADDRESS
 
 def doorbell_mode():
@@ -15,7 +15,7 @@ def quit_quatz():
     runningp, pids = quatz_running_p()
     if runningp:
         for pid in pids:
-            subprocess.call('kill %s' % pid)
+            os.kill(int(pid), signal.SIGTERM)
 
 def test_quatz():
     open_quatz()
