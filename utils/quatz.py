@@ -1,30 +1,36 @@
 import zmq, time, thread, threading, json, os, subprocess
 from settings import QUATZ_ADDRESS
-global quatz_instance
-quatz_instance = False
-
 
 def doorbell_mode():
-    web_mode(8, ['http://10.0.2.1/~MAT/ipcamimages/index.html'])
+    web_mode(8, ['http://127.0.0.1/~MAT/ipcamimages/index.html'])
     subprocess.call('/usr/local/bin/play /Users/mat/src/chandelier_infohub/static/69385__guitarguy1985__doorbell2.wav', shell=True)
     time.sleep(15)
     web_mode(4, ['http://127.0.0.1:8000/processing/sketch/dorkbot.pde'])
 
 def open_quatz():
-    global quatz_instance
-    if not quatz_instance:
-        quatz_instance = subprocess.Popen("/Users/%s/src/chandelier_displayer/build/Release/Quatz.app/Contents/MacOS/Quatz" % os.environ['USER'])
+    if not quatz_running_p()[0]:
+        subprocess.Popen("/Users/%s/src/chandelier_displayer/build/Release/Quatz.app/Contents/MacOS/Quatz" % os.environ['USER'])
 
 def quit_quatz():
-    global quatz_instance
-    if quatz_instance:
-        quatz_instance.terminate()
-        quatz_instance = False
+    runningp, pids = quatz_running_p()
+    if runningp:
+        for pid in pids:
+            subprocess.call('kill %s' % pid)
 
 def test_quatz():
     open_quatz()
     time.sleep(10)
     quit_quatz()
+
+def quatz_running_p():
+    ps_output = subprocess.Popen('ps auxw | grep [Q]uatz', shell=True, stdout=subprocess.PIPE).stdout.read()
+    runningp = ps_output == True
+    pids = []
+    if runningp:
+        ps_lines = ps_output.split('\n')
+        for l in ps_lines:
+            pids.append(l.split()[1])
+    return runningp, pids
 
 def web_mode(views, urls):
     """Starts the web mode on the chandelier.
