@@ -15,21 +15,25 @@ def quit_quatz():
     runningp, pids = quatz_running_p()
     if runningp:
         for pid in pids:
+            print pid
             os.kill(int(pid), signal.SIGTERM)
 
 def test_quatz():
     open_quatz()
-    time.sleep(10)
+    time.sleep(2)
     quit_quatz()
 
 def quatz_running_p():
     ps_output = subprocess.Popen('ps auxw | grep [Q]uatz', shell=True, stdout=subprocess.PIPE).stdout.read()
-    runningp = ps_output == True
+    runningp = (ps_output != '')
     pids = []
     if runningp:
         ps_lines = ps_output.split('\n')
         for l in ps_lines:
-            pids.append(l.split()[1])
+            if len(l) > 0:
+                comps = l.split()
+                if len(comps) > 1:
+                    pids.append(comps[1])
     return runningp, pids
 
 def web_mode(views, urls):
